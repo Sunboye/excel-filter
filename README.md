@@ -30,5 +30,6 @@
  - `npm run excel`: 流式IO，基于exceljs插件，没有文件大小限制，建议用于超大文件
 
 
- ## 更新内容
- 
+ ## 更新日志
+
+- 集成log4js日志管理模块[commit](https://github.com/Sunboye/excel-filter/commit/be47ce2b1ec86e224abec4e8f206874d8dc4c1ac)
