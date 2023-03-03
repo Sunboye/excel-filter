@@ -3,14 +3,14 @@
 
 
 ## 功能概述
-根据关键字对Excel文件进行过滤操作，过滤后的数据生成新的Excel文件
+根据自定义的关键字对Excel文件进行过滤操作，Excel一行内任意一个cell的内容包含关键字，则保留该行，否则删除该行，过滤后的数据生成新的Excel文件
 
 
 ## 使用说明
 
 ### 依赖环境
 
-1. 安装nodejs，版本 >= 10。 [nodejs官网](https://nodejs.org/zh-cn/)
+1. 安装[nodejs](https://nodejs.org/zh-cn/)，版本 >= 10
 
 ### 支持
 1. 支持xlsx格式文件（其他格式未验证）
