@@ -108,7 +108,7 @@ const doExcel = (reg) => {
           workbookWrite.commit()//提交工作簿，即写入文件
           console.log('end')
           console.log(`请打开以下目录查看文件名为${file}的Excel文件,如没有文件请重试！！！`)
-          console.log('vv\nvv\nvv\nvv')
+          console.log('vv')
           console.log(targetDir)
         });
         workbookReader.on('error', (readerErr) => {

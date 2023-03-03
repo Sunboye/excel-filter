@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path')
 const config = require('./config.js')
 // const regFilter = /欢|倩/g
-console.log(process.argv)
 const sourceDir = path.resolve(__dirname, './sources')
 const targetDir = path.resolve(__dirname, './target')
 
