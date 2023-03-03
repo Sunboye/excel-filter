@@ -37,11 +37,24 @@ const check = () => {
     }
   })
 }
+
+const fileType = (files) => {
+  console.log(files)
+  const allowExts = config && config.fileExt && config.fileExt.length ? config.fileExt : []
+  if (files && files.length) {
+    return files.filter(item => {
+      const filePath = `${sourceDir}/${item}`
+      return allowExts && allowExts.length ? !fs.statSync(filePath).isDirectory() && allowExts.includes(path.extname(filePath)) : !fs.statSync(filePath).isDirectory()
+    }) || []
+  }
+  return []
+}
+
 const doExcel = (reg) => {
   fs.readdir(sourceDir, (err, files) => {
-    const fileNames = files
+    const fileNames = fileType(files)
+    console.log(fileNames)
     if (fileNames && fileNames.length) {
-      console.log(fileNames)
       console.log('正在解析Excel文件, 请耐心等待...')
       fileNames.forEach(file => {
         console.log(file)
@@ -124,7 +137,7 @@ const doExcel = (reg) => {
         // });
       })
     } else {
-      console.error(`${targetDir}未发现文件`)
+      console.error(`${targetDir}未发现可处理的文件`)
     }
   })
 }
