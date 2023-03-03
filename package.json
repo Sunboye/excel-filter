@@ -1,0 +1,27 @@
+{
+  "name": "filter-excel",
+  "version": "1.0.0",
+  "author": "yangss",
+  "dependencies": {
+    "core-js": "^3.29.0",
+    "exceljs": "^4.3.0",
+    "regenerator-runtime": "^0.13.11"
+  },
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "node-xlsx": "^0.21.0",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "xlsx": "node index.js",
+    "excel": "node index-exceljs.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sunboye/excel-filter.git"
+  },
+  "license": "MIT"
+}
