@@ -6,7 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-#lock.json
+# 目标文件夹
+target
+
+# lock.json
 *-lock.json
 
 # Diagnostic reports (https://nodejs.org/api/report.html)

@@ -1,6 +1,7 @@
 const ExcelJS = require('exceljs');
 const fs = require('fs');
 const path = require('path')
+const config = require('./config.js')
 // exceljs 所需的 polyfills
 require('core-js/modules/es.promise');
 require('core-js/modules/es.string.includes');
@@ -9,16 +10,47 @@ require('core-js/modules/es.object.keys');
 require('core-js/modules/es.symbol');
 require('core-js/modules/es.symbol.async-iterator');
 require('regenerator-runtime/runtime')
-console.log(process.argv)
-const config = require('./config.js')
-// const regFilter = /欢|倩/g
 
+console.log(process.argv)
+const sourceDir = path.resolve(__dirname, './sources')
+const targetDir = path.resolve(__dirname, './target')
+
+const mkdir = () => {
+  console.log(`正在创建目录${targetDir}...`)
+  fs.mkdir(targetDir, (err, data) => {
+    if (err) {
+      console.error(err)
+      throw err
+    } else {
+      console.log(`创建目录${targetDir}成功`)
+      check()
+    }
+  })
+}
+
+const check = () => {
+  fs.exists(targetDir, (isExist) => {
+    if (isExist) {
+      if (config && config.filterKeys && Array.isArray(config.filterKeys) && config.filterKeys.length) {
+        const filterKeys = config.filterKeys.filter(item => item)
+        const regFilter = new RegExp(`${filterKeys.join('|')}`, 'g')
+        console.log(regFilter)
+        doExcel(regFilter)
+      } else {
+        console.error('参数错误: config.js--filterKeys')
+      }
+    } else {
+      console.error(`${targetDir}目录不存在...`)
+      mkdir()
+    }
+  })
+}
 const doExcel = (reg) => {
-  const sourceDir = path.resolve(__dirname, './sources')
-  const targetDir = path.resolve(__dirname, './target')
   fs.readdir(sourceDir, (err, files) => {
     const fileNames = files
     if (fileNames && fileNames.length) {
+      console.log(fileNames)
+      console.log('正在解析Excel文件, 请耐心等待...')
       fileNames.forEach(file => {
         console.log(`正在对文件${file}建立读写通道, 请耐心等待...`)
         const workbookReader = new ExcelJS.stream.xlsx.WorkbookReader(`${sourceDir}/${file}`);
@@ -66,23 +98,16 @@ const doExcel = (reg) => {
           console.log('vv\nvv\nvv\nvv')
           console.log(targetDir)
         });
-        workbookReader.on('error', (rerr) => {
-          console.dir(rerr)
-          throw rerr
+        workbookReader.on('error', (readerErr) => {
+          console.dir(readerErr)
+          throw readerErr
         });
       })
     } else {
-      console.error(`${targetDir}没有文件`)
+      console.error(`${targetDir}未发现文件`)
     }
   })
 }
-if (config && config.filterKeys && Array.isArray(config.filterKeys) && config.filterKeys.length) {
-  console.log(config.filterKeys)
-  const filterKeys = config.filterKeys.filter(item => item)
-  const regFilter = new RegExp(`${filterKeys.join('|')}`, 'g')
-  console.log(regFilter)
-  doExcel(regFilter)
-} else {
-  console.error('参数错误: config.js--filterKeys')
-  return
-}
+
+// 程序入口
+check()
