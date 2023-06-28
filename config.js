@@ -1,3 +1,11 @@
+/*
+ * @Author: yangss
+ * @Position: 
+ * @Date: 2023-06-27 18:37:07
+ * @LastEditors: yangss
+ * @LastEditTime: 2023-06-28 09:40:35
+ * @FilePath: \excel-filter\config.js
+ */
 const path = require('path');
 const log4js = require('log4js');
 
@@ -31,9 +39,9 @@ log4js.configure({
     },
     categories: {
         // 默认日志，输出debug 及以上级别的日志
-        default: { appenders: [ 'all', 'console' ], level: 'trace' },
+        default: { appenders: [ 'all', 'console' ], level: 'all' },
         // 错误日志，输出error 及以上级别的日志
-        error: { appenders: [ 'error' ], level: 'error' },
+        error: { appenders: [ 'error', 'console' ], level: 'error' },
     }
 });
 const config = {
@@ -47,8 +55,9 @@ const config = {
 
 // 重构console打印方法
 const nomalLogger = config.logger.nomal
+const errorLogger = config.logger.error
 console.log = nomalLogger.info.bind(nomalLogger)
 console.dir = nomalLogger.trace.bind(nomalLogger)
-console.error = nomalLogger.error.bind(nomalLogger)
+console.error = errorLogger.error.bind(errorLogger)
 
 module.exports = config

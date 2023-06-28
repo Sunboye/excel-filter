@@ -90,7 +90,7 @@ const doExcel = (reg) => {
           tagetData.push(rowData)
         })
         console.log(`数据量级：${tagetData[0].data ? tagetData[0].data.length : 0}`)
-        console.log('正在转换Buffer数据, 请耐心等待...')
+        console.error('正在转换Buffer数据, 请耐心等待...')
         //将经过处理的数据写入新的xlsx文件中
         const buffer = xlsx.build(tagetData);
         // const buffer = Buffer.from(tagetData);
