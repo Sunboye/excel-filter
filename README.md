@@ -1,3 +1,11 @@
+<!--
+ * @Author: yangss
+ * @Position: 
+ * @Date: 2023-06-27 18:37:07
+ * @LastEditors: yangss
+ * @LastEditTime: 2023-06-30 11:15:10
+ * @FilePath: \excel-filter\README.md
+-->
 # excel-filter
 根据设置的关键字对Excel文件进行模糊过滤操作，过滤后的数据生成新的Excel文件
 
@@ -32,4 +40,4 @@
 
  ## 更新日志
 
-- 集成log4js日志管理模块[commit](https://github.com/Sunboye/excel-filter/commit/be47ce2b1ec86e224abec4e8f206874d8dc4c1ac)
+- 集成log4js日志管理模块[commit](https://github.com/sunboye/excel-filter/commit/be47ce2b1ec86e224abec4e8f206874d8dc4c1ac)
